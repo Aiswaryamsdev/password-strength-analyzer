@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Google Fonts for a modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="container">
+        <div class="analyzer-card">
+            <div id="security-shield" class="shield-container">
+                <svg viewBox="0 0 100 100" class="shield-svg" aria-hidden="true">
+                    <path d="M50 10 L20 25 V50 C20 75 50 90 50 90 C50 90 80 75 80 50 V25 L50 10 Z" />
+                    <path d="M40 40 L50 50 L60 40" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" />
+                </svg>
+                <div class="shield-glow"></div>
+            </div>
+
+            <h1>Password Analyzer</h1>
+            <p class="subtitle">Real-time security encryption analysis</p>
+
+            <div class="input-group">
+                <label for="password-input" class="visually-hidden">Enter password to analyze</label>
+                <input type="password" id="password-input" placeholder="Enter secret key..." autocomplete="off">
+                <button id="toggle-password" class="toggle-btn" aria-label="Toggle password visibility">👁️</button>
+                <div id="scan-line" class="scan-line"></div>
+            </div>
+
+            <div class="action-group">
+                <button id="generate-btn" class="action-btn">Generate Strong Password</button>
+                <button id="copy-btn" class="action-btn" aria-label="Copy password to clipboard">Copy</button>
+            </div>
+
+            <div id="analysis-results" aria-live="polite">
+                <div class="strength-meter">
+                    <div id="strength-bar" class="strength-bar"></div>
+                </div>
+                <p id="score-text">Score: <span class="score-val">0</span>/100</p>
+                <p id="strength-text">Status: <span class="status-val">IDLE</span></p>
+            </div>
+
+            <ul class="criteria-list">
+                <li id="crit-length" class="criteria-item">At least 8 characters</li>
+                <li id="crit-upper" class="criteria-item">Uppercase letter</li>
+                <li id="crit-lower" class="criteria-item">Lowercase letter</li>
+                <li id="crit-number" class="criteria-item">Number</li>
+                <li id="crit-special" class="criteria-item">Special character (@, #, $, etc.)</li>
+            </ul>
+
+            <div id="suggestions" class="terminal-window" style="display: none;">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="terminal-title">SYSTEM_LOG</span>
+                </div>
+                <div class="terminal-body">
+                    <p id="suggestion-text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
